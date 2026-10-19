@@ -282,6 +282,172 @@
     select.insertAdjacentHTML('beforeend', T.airlines.map((a) => `<option value="${esc(a)}">${esc(a)}</option>`).join(''));
   }
 
+  // ---------- date range picker ----------
+  // One field; drag across days (mouse or touch) or tap start then end. Writes ISO dates to two hidden inputs.
+  const iso = (y, m, d) => `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+  const TH_MONTHS_FULL = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+  const fmtOne = (s) => { const p = parts(s); return `${p.d} ${p.m} ${p.y}`; };
+
+  function rangePicker(root) {
+    const fromInput = document.getElementById(root.dataset.from);
+    const toInput = document.getElementById(root.dataset.to);
+    const btn = $('.range-btn', root);
+    const text = $('.range-text', root);
+    const now = new Date();
+    const today = iso(now.getFullYear(), now.getMonth(), now.getDate());
+    let view = { y: now.getFullYear(), m: now.getMonth() };
+    let from = '';
+    let to = '';
+    let anchor = '';
+    let pending = '';
+    let dragging = false;
+    let pop = null;
+
+    const months = () => (window.innerWidth >= 720 ? 2 : 1);
+    const order = (a, b) => (a <= b ? [a, b] : [b, a]);
+
+    function label() {
+      if (from && to) text.textContent = from === to ? fmtOne(from) : fmtRange(from, to);
+      else text.textContent = 'เลือกช่วงวันที่';
+      root.classList.toggle('has-value', !!from);
+    }
+
+    function commit(close) {
+      fromInput.value = from;
+      toInput.value = to;
+      label();
+      fromInput.dispatchEvent(new Event('input', { bubbles: true }));
+      toInput.dispatchEvent(new Event('input', { bubbles: true }));
+      if (close) hide();
+    }
+
+    function monthHtml(y, m) {
+      const first = new Date(y, m, 1).getDay();
+      const days = new Date(y, m + 1, 0).getDate();
+      let cells = '';
+      for (let i = 0; i < first; i++) cells += '<span></span>';
+      for (let d = 1; d <= days; d++) {
+        const v = iso(y, m, d);
+        cells += `<button type="button" class="day" data-date="${v}"${v < today ? ' disabled' : ''}${v === today ? ' data-today' : ''}>${d}</button>`;
+      }
+      return `<div class="cal-month"><strong>${TH_MONTHS_FULL[m]} ${y + 543}</strong>
+        <div class="cal-grid" role="grid">${['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'].map((w) => `<span class="wd">${w}</span>`).join('')}${cells}</div></div>`;
+    }
+
+    function paint(hover) {
+      if (!pop) return;
+      let a = from;
+      let b = to;
+      if (pending && hover && !dragging) [a, b] = order(pending, hover);
+      $$('.day', pop).forEach((el) => {
+        const v = el.dataset.date;
+        el.classList.toggle('in', !!a && v >= a && v <= b);
+        el.classList.toggle('edge', v === a || v === b);
+        el.setAttribute('aria-pressed', String(!!a && v >= a && v <= b));
+      });
+      $('.cal-hint', pop).textContent = pending ? 'เลือกวันสิ้นสุด' : 'ลากบนปฏิทินเพื่อเลือกช่วง หรือกดวันเริ่มแล้วกดวันสิ้นสุด';
+    }
+
+    function render() {
+      const list = [];
+      for (let i = 0; i < months(); i++) {
+        const d = new Date(view.y, view.m + i, 1);
+        list.push(monthHtml(d.getFullYear(), d.getMonth()));
+      }
+      const atStart = view.y === now.getFullYear() && view.m === now.getMonth();
+      pop.innerHTML = `
+        <div class="cal-nav">
+          <button type="button" class="cal-arrow" data-nav="-1" aria-label="เดือนก่อนหน้า"${atStart ? ' disabled' : ''}>‹</button>
+          <button type="button" class="cal-arrow" data-nav="1" aria-label="เดือนถัดไป">›</button>
+        </div>
+        <div class="cal-months">${list.join('')}</div>
+        <div class="cal-foot"><span class="cal-hint"></span><span class="cal-actions"><button type="button" class="btn btn-ghost" data-act="clear">ล้าง</button><button type="button" class="btn btn-primary" data-act="done">ตกลง</button></span></div>`;
+      paint();
+    }
+
+    const dayAt = (e) => {
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const day = el && el.closest('.day');
+      return day && !day.disabled && pop.contains(day) ? day.dataset.date : '';
+    };
+
+    function show() {
+      if (pop) return;
+      if (from) { const [y, m] = from.split('-').map(Number); view = { y, m: m - 1 }; }
+      pop = document.createElement('div');
+      pop.className = 'range-pop';
+      pop.setAttribute('role', 'dialog');
+      pop.setAttribute('aria-label', 'เลือกช่วงวันเดินทาง');
+      root.appendChild(pop);
+      render();
+      btn.setAttribute('aria-expanded', 'true');
+
+      pop.addEventListener('click', (e) => {
+        const nav = e.target.closest('[data-nav]');
+        if (nav) { view = { y: view.y, m: view.m + Number(nav.dataset.nav) }; const d = new Date(view.y, view.m, 1); view = { y: d.getFullYear(), m: d.getMonth() }; render(); return; }
+        const act = e.target.closest('[data-act]');
+        if (act && act.dataset.act === 'clear') { from = ''; to = ''; pending = ''; commit(false); paint(); return; }
+        if (act && act.dataset.act === 'done') { if (pending) { from = pending; to = pending; pending = ''; commit(false); } hide(); btn.focus(); return; }
+        const day = e.target.closest('.day');
+        if (day && e.detail === 0) tapDay(day.dataset.date); // keyboard activation
+      });
+      pop.addEventListener('pointerdown', (e) => {
+        const d = e.target.closest('.day') && dayAt(e);
+        if (!d) return;
+        e.preventDefault();
+        dragging = true;
+        anchor = pending || d;
+        [from, to] = order(anchor, d);
+        paint();
+      });
+      pop.addEventListener('pointermove', (e) => {
+        const d = dayAt(e);
+        if (!d) return;
+        if (dragging) { [from, to] = order(anchor, d); paint(); return; }
+        if (pending) paint(d);
+      });
+      document.addEventListener('pointerup', onUp);
+      document.addEventListener('pointerdown', onOutside);
+      document.addEventListener('keydown', onKey);
+    }
+
+    function tapDay(d) {
+      if (!pending) { pending = d; from = d; to = d; paint(); return; }
+      [from, to] = order(pending, d);
+      pending = '';
+      commit(true);
+    }
+
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      if (from !== to) { pending = ''; commit(true); return; }
+      if (pending && pending !== from) { pending = ''; commit(true); return; }
+      if (pending && pending === from) { pending = ''; commit(true); return; } // same day tapped twice = one-day range
+      pending = from;
+      paint();
+    }
+    function onOutside(e) { if (pop && !root.contains(e.target)) hide(); }
+    function onKey(e) { if (e.key === 'Escape') { hide(); btn.focus(); } }
+
+    function hide() {
+      if (!pop) return;
+      if (pending) { from = fromInput.value; to = toInput.value; pending = ''; }
+      pop.remove();
+      pop = null;
+      dragging = false;
+      btn.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('pointerup', onUp);
+      document.removeEventListener('pointerdown', onOutside);
+      document.removeEventListener('keydown', onKey);
+      label();
+    }
+
+    btn.addEventListener('click', () => (pop ? hide() : show()));
+    root._picker = { sync() { from = fromInput.value; to = toInput.value || fromInput.value; label(); } };
+    label();
+  }
+
   // ---------- demo forms (no backend yet) ----------
   function wireDemoForms() {
     $$('form[data-demo-form]').forEach((form) => {
@@ -377,8 +543,10 @@
       const s = store.get('tako.search');
       if (s) { q.value = s.q || ''; from.value = s.from || ''; to.value = s.to || ''; airline.value = s.airline || ''; }
     }
+    const picker = from.closest('[data-range]')._picker;
+    picker.sync();
     [q, from, to, airline, sort].forEach((el) => el.addEventListener('input', render));
-    $('#tour-reset').addEventListener('click', () => { q.value = ''; from.value = ''; to.value = ''; airline.value = ''; sort.value = ''; render(); });
+    $('#tour-reset').addEventListener('click', () => { q.value = ''; from.value = ''; to.value = ''; airline.value = ''; sort.value = ''; picker.sync(); render(); });
     window.addEventListener('hashchange', () => { render(); window.scrollTo({ top: 0 }); });
     render();
   }
@@ -654,7 +822,7 @@
       </section>
       <section class="wrap section">
         <div class="section-head"><div><span class="eyebrow">ห้ามพลาด</span><h2 class="h2">สถานที่แนะนำใน${esc(g.name)}</h2></div></div>
-        <div class="grid place-grid">${g.places.map((p) => `<div class="place">${ICON.pinS}<div><h3>${esc(p[0])}</h3><p>${esc(p[1])}</p></div></div>`).join('')}</div>
+        <div class="grid place-grid">${g.places.map((p, i) => placeCard(g, p, i)).join('')}</div>
       </section>
       ${g.img2 ? `<section class="wrap section"><figure class="wide-photo"><img src="${g.img2}" alt="${esc(g.alt2)}" loading="lazy" width="1400" height="800"><figcaption>${esc(g.alt2)}</figcaption></figure></section>` : ''}
       <section class="wrap section">
@@ -668,6 +836,17 @@
         <a class="text-link" href="destination.html#${prev.key}">← เที่ยว${esc(prev.name)}</a>
         <a class="text-link" href="destination.html#${next.key}">เที่ยว${esc(next.name)} →</a>
       </nav>`;
+  }
+
+  function placeCard(g, p, i) {
+    const key = `${g.key}-${i + 1}`;
+    const cr = T.placeCredits[key];
+    const credit = cr ? `<small class="credit">ภาพ: <a href="${cr.url}" target="_blank" rel="noopener">${esc(cr.by)}</a> · ${esc(cr.license)}</small>` : '';
+    return `
+      <article class="place">
+        <div class="ph"><img src="assets/img/places/${key}.jpg" alt="${esc(p[0])}" loading="lazy" width="800" height="530"></div>
+        <div class="body"><h3>${ICON.pinS}${esc(p[0])}</h3><p>${esc(p[1])}</p>${credit}</div>
+      </article>`;
   }
 
   function initVisa() {
@@ -721,6 +900,7 @@
   renderHeader();
   renderFooter();
   wireDemoForms();
+  $$('[data-range]').forEach(rangePicker);
   const inits = {
     home: initHome, tours: initTours, tour: initTour, booking: initBooking, promotions: initPromotions, faq: initFaq,
     golf: initGolf, cruise: initCruise, destinations: initDestinations, destination: initDestination, visa: initVisa

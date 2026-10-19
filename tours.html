@@ -34,8 +34,7 @@
     <div class="toolbar">
       <div style="display: flex; flex-wrap: wrap; gap: 12px; flex: 1 1 420px;">
         <div class="field" style="flex: 2 1 240px;"><label for="tour-q" class="sr-only">ชื่อหรือรหัสโปรแกรม</label><input class="input" id="tour-q" type="search" placeholder="ชื่อหรือรหัสโปรแกรม"></div>
-        <div class="field" style="flex: 1 1 150px;"><label for="tour-from">ตั้งแต่</label><input class="input" id="tour-from" type="date"></div>
-        <div class="field" style="flex: 1 1 150px;"><label for="tour-to">ถึง</label><input class="input" id="tour-to" type="date"></div>
+        <div class="field" style="flex: 1.5 1 240px;"><span class="label sr-only" id="tour-range-label">ช่วงวันเดินทาง</span><div class="range" data-range data-from="tour-from" data-to="tour-to"><button type="button" class="input range-btn" aria-haspopup="dialog" aria-expanded="false" aria-labelledby="tour-range-label tour-range-label-v"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="range-text" id="tour-range-label-v">เลือกช่วงวันที่</span></button><input type="hidden" id="tour-from"><input type="hidden" id="tour-to"></div></div>
         <div class="field" style="flex: 1 1 170px;"><label for="tour-airline" class="sr-only">สายการบิน</label><select class="input" id="tour-airline"><option value="">ทุกสายการบิน</option></select></div>
         <button type="button" class="btn btn-ghost" id="tour-reset">ล้างตัวกรอง</button>
       </div>
