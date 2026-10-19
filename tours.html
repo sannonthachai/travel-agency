@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>ทัวร์ทั้งหมด | Tako Tour</title>
+<meta name="description" content="รวมแพ็กเกจทัวร์ญี่ปุ่น ฝรั่งเศส อิตาลี บาหลี และทัวร์ในประเทศ กระบี่ ภูเก็ต เชียงใหม่ จาก Tako Tour ค้นหาตามปลายทางและเดือนเดินทาง">
+<link rel="canonical" href="https://www.takoworldtour.com/tours.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Tako Tour">
+<meta property="og:title" content="ทัวร์ทั้งหมด | Tako Tour">
+<meta property="og:description" content="รวมแพ็กเกจทัวร์ญี่ปุ่น ฝรั่งเศส อิตาลี บาหลี และทัวร์ในประเทศ กระบี่ ภูเก็ต เชียงใหม่ จาก Tako Tour ค้นหาตามปลายทางและเดือนเดินทาง">
+<meta property="og:url" content="https://www.takoworldtour.com/tours.html">
+<meta property="og:image" content="https://www.takoworldtour.com/assets/img/italy-dolomites.jpg">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&amp;family=Prompt:wght@500;600;700&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="tours">
+<div id="site-header"></div>
+<main>
+  <section class="page-hero">
+    <img id="tours-hero-img" src="assets/img/italy-dolomites.jpg" alt="ทะเลสาบในเทือกเขาโดโลมิติ" width="1600" height="900">
+    <div class="wrap"><span class="eyebrow" style="color: #FFD5C8;">แพ็กเกจทัวร์</span><h1 id="tours-title">ทัวร์ทั้งหมด</h1><p id="tours-sub">แพ็กเกจทัวร์ในประเทศและต่างประเทศจาก Tako Tour</p></div>
+  </section>
+  <section class="wrap" style="padding-top: 40px;">
+    <nav aria-label="กรองตามปลายทาง" class="chips" id="chips" style="margin-bottom: 20px;"></nav>
+    <div class="toolbar">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; flex: 1 1 420px;">
+        <div class="field" style="flex: 2 1 220px;"><label for="tour-q" class="sr-only">ค้นหาทัวร์</label><input class="input" id="tour-q" type="search" placeholder="ค้นหาชื่อทัวร์ เมือง หรือรหัสทัวร์"></div>
+        <div class="field" style="flex: 1 1 160px;"><label for="tour-month" class="sr-only">เดือนที่เดินทาง</label><select class="input" id="tour-month"><option value="">ทุกเดือน</option><option value="พ.ย. 2569">พฤศจิกายน 2569</option><option value="ธ.ค. 2569">ธันวาคม 2569</option><option value="ม.ค. 2570">มกราคม 2570</option><option value="เม.ย. 2570">เมษายน 2570</option><option value="พ.ค. 2570">พฤษภาคม 2570</option><option value="ก.ย. 2570">กันยายน 2570</option></select></div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+        <span id="tour-count" style="color: var(--muted); font-size: 14px;" aria-live="polite"></span>
+        <div class="field"><label for="tour-sort">เรียงตาม</label><select class="input" id="tour-sort"><option value="">แนะนำ</option><option value="price-asc">ราคาต่ำ – สูง</option><option value="price-desc">ราคาสูง – ต่ำ</option></select></div>
+      </div>
+    </div>
+    <div class="grid grid-tours" id="tour-list"></div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

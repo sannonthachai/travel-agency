@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>คำขอจองทัวร์ | Tako Tour</title>
+<meta name="description" content="กรอกข้อมูลเพื่อขอจองทัวร์กับ Tako Tour ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมงเพื่อยืนยันที่นั่ง">
+<link rel="canonical" href="https://www.takoworldtour.com/booking.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Tako Tour">
+<meta property="og:title" content="คำขอจองทัวร์ | Tako Tour">
+<meta property="og:description" content="กรอกข้อมูลเพื่อขอจองทัวร์กับ Tako Tour ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมงเพื่อยืนยันที่นั่ง">
+<meta property="og:url" content="https://www.takoworldtour.com/booking.html">
+<meta property="og:image" content="https://www.takoworldtour.com/assets/img/japan-kyoto.jpg">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&amp;family=Prompt:wght@500;600;700&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="booking">
+<div id="site-header"></div>
+<main>
+  <section class="page-hero plain">
+  <div class="wrap"><span class="eyebrow">จองทัวร์</span><h1>คำขอจองทัวร์</h1><p>กรอกข้อมูลผู้ติดต่อ ทีมงานจะโทรหรือทัก LINE กลับภายใน 24 ชั่วโมง เพื่อยืนยันที่นั่งและแจ้งช่องทางชำระมัดจำ</p></div>
+</section>
+  <section class="wrap" style="padding-top: 40px;" id="booking-root">
+    <form id="booking-form" class="two-col" novalidate>
+      <div class="panel" style="display: flex; flex-direction: column; gap: 18px;">
+        <h2 style="font-size: 22px;">ข้อมูลผู้ติดต่อ</h2>
+        <div class="form-grid">
+          <div class="field"><label for="bk-name">ชื่อ-นามสกุล</label><input class="input" id="bk-name" required autocomplete="name"></div>
+          <div class="field"><label for="bk-phone">เบอร์โทรศัพท์</label><input class="input" id="bk-phone" type="tel" required autocomplete="tel" placeholder="08x xxx xxxx"></div>
+          <div class="field"><label for="bk-email">อีเมล</label><input class="input" id="bk-email" type="email" autocomplete="email"></div>
+          <div class="field"><label for="bk-line">LINE ID</label><input class="input" id="bk-line"></div>
+          <div class="field full"><label for="bk-note">ความต้องการเพิ่มเติม</label><textarea class="input" id="bk-note" placeholder="เช่น อาหารมังสวิรัติ ต้องการห้องเตียงเดี่ยว"></textarea></div>
+          <label class="check full" for="bk-accept"><input type="checkbox" id="bk-accept" required><span>ฉันอ่านและยอมรับ <a href="cancellation.html">เงื่อนไขการยกเลิก</a> และ <a href="how-to-book.html">วิธีการชำระเงิน</a></span></label>
+        </div>
+        <button class="btn btn-primary btn-lg" type="submit">ส่งคำขอจอง</button>
+        <p class="form-note">ยังไม่ต้องชำระเงินตอนนี้ ทีมงานจะยืนยันที่นั่งก่อน</p>
+      </div>
+      <aside class="book" aria-label="สรุปการจอง">
+        <img id="bk-img" src="assets/img/japan-kyoto.jpg" alt="" style="width: 100%; height: 180px; object-fit: cover; border-radius: 12px;" width="600" height="360">
+        <strong id="bk-tour" style="font-family: var(--font-display); font-size: 18px; line-height: 1.4;"></strong>
+        <div class="field"><label for="bk-round">รอบเดินทาง</label><select class="input" id="bk-round"></select></div>
+        <div class="form-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+          <div class="field"><label for="bk-adults">ผู้ใหญ่</label><input class="input" id="bk-adults" type="number" min="1" max="9" value="2" required></div>
+          <div class="field"><label for="bk-children">เด็ก 2–11 ปี</label><input class="input" id="bk-children" type="number" min="0" max="9" value="0"></div>
+        </div>
+        <div class="total"><span>ราคารวมโดยประมาณ</span><strong id="bk-total" aria-live="polite"></strong></div>
+      </aside>
+    </form>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

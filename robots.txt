@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /
+
+# Preview build. For production use:
+# Allow: /
+# Disallow: /booking.html
+# Sitemap: https://www.takoworldtour.com/sitemap.xml

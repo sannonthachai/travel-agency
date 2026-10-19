@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Tako Tour">
+  <defs>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
+    <linearGradient id="aL" x1="0" y1="0.3" x2="1" y2="0.7">
+      <stop offset="0" stop-color="#FFA488"/><stop offset="0.6" stop-color="#FF6B4A"/><stop offset="1" stop-color="#E5533A"/>
+    </linearGradient>
+    <linearGradient id="aR" x1="1" y1="0.3" x2="0" y2="0.7">
+      <stop offset="0" stop-color="#E5533A"/><stop offset="0.7" stop-color="#B93A25"/><stop offset="1" stop-color="#9E3020"/>
+    </linearGradient>
+    <g id="sil">
+      <path d="M104 64 C76 38 32 40 18 60 C24 98 60 118 104 108 Z"/>
+      <path d="M102 102 C78 120 50 146 38 186 C66 178 88 166 102 150 Z"/>
+      <path d="M100 6 C94 24 90 44 88 66 L100 74 Z"/>
+      <g transform="translate(100 0) scale(0.72 1) translate(-100 0)">
+        <path d="M96 64 C124 38 168 40 182 60 C176 98 140 118 96 108 Z"/>
+        <path d="M98 102 C122 120 150 146 162 186 C134 178 112 166 98 150 Z"/>
+        <path d="M100 6 C106 24 110 44 112 66 L100 74 Z"/>
+      </g>
+      <rect x="96" y="60" width="8" height="96"/>
+    </g>
+  </defs>
+  <g transform="translate(130 132) rotate(68) scale(0.9) translate(-100 -100)" filter="url(#blur)" opacity="0.22">
+    <use href="#sil" fill="#0B1F3A"/>
+  </g>
+  <g transform="translate(120 116) rotate(68) scale(0.9) translate(-100 -100)">
+    <g stroke-linejoin="round" stroke-width="4">
+      <path d="M104 64 C76 38 32 40 18 60 C24 98 60 118 104 108 Z" fill="url(#aL)" stroke="url(#aL)"/>
+      <path d="M102 102 C78 120 50 146 38 186 C66 178 88 166 102 150 Z" fill="url(#aL)" stroke="url(#aL)"/>
+      <path d="M100 6 C94 24 90 44 88 66 L100 74 Z" fill="url(#aL)" stroke="url(#aL)"/>
+      <g transform="translate(100 0) scale(0.72 1) translate(-100 0)">
+        <path d="M96 64 C124 38 168 40 182 60 C176 98 140 118 96 108 Z" fill="url(#aR)" stroke="url(#aR)"/>
+        <path d="M98 102 C122 120 150 146 162 186 C134 178 112 166 98 150 Z" fill="url(#aR)" stroke="url(#aR)"/>
+        <path d="M100 6 C106 24 110 44 112 66 L100 74 Z" fill="url(#aR)" stroke="url(#aR)"/>
+      </g>
+      <rect x="96" y="60" width="4" height="96" fill="#E5533A" stroke="none"/>
+      <rect x="100" y="60" width="4" height="96" fill="#B93A25" stroke="none"/>
+    </g>
+    <path d="M98 70 C80 54 50 50 30 60 C54 58 80 64 98 80 Z" fill="#FFFFFF" opacity="0.28"/>
+    <path d="M98 112 C84 124 66 140 54 164 C70 146 86 132 98 124 Z" fill="#FFFFFF" opacity="0.2"/>
+    <path d="M24 62 Q100 92 158 62" stroke="#FFE4DA" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <path d="M99 10 L99 152" stroke="#FFE4DA" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M101.8 22 L101.8 150" stroke="#7A2416" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+  </g>
+</svg>
