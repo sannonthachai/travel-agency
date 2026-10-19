@@ -33,12 +33,15 @@
     <nav aria-label="กรองตามปลายทาง" class="chips" id="chips" style="margin-bottom: 20px;"></nav>
     <div class="toolbar">
       <div style="display: flex; flex-wrap: wrap; gap: 12px; flex: 1 1 420px;">
-        <div class="field" style="flex: 2 1 220px;"><label for="tour-q" class="sr-only">ค้นหาทัวร์</label><input class="input" id="tour-q" type="search" placeholder="ค้นหาชื่อทัวร์ เมือง หรือรหัสทัวร์"></div>
-        <div class="field" style="flex: 1 1 160px;"><label for="tour-month" class="sr-only">เดือนที่เดินทาง</label><select class="input" id="tour-month"><option value="">ทุกเดือน</option><option value="พ.ย. 2569">พฤศจิกายน 2569</option><option value="ธ.ค. 2569">ธันวาคม 2569</option><option value="ม.ค. 2570">มกราคม 2570</option><option value="เม.ย. 2570">เมษายน 2570</option><option value="พ.ค. 2570">พฤษภาคม 2570</option><option value="ก.ย. 2570">กันยายน 2570</option></select></div>
+        <div class="field" style="flex: 2 1 240px;"><label for="tour-q" class="sr-only">ชื่อหรือรหัสโปรแกรม</label><input class="input" id="tour-q" type="search" placeholder="ชื่อหรือรหัสโปรแกรม"></div>
+        <div class="field" style="flex: 1 1 150px;"><label for="tour-from">ตั้งแต่</label><input class="input" id="tour-from" type="date"></div>
+        <div class="field" style="flex: 1 1 150px;"><label for="tour-to">ถึง</label><input class="input" id="tour-to" type="date"></div>
+        <div class="field" style="flex: 1 1 170px;"><label for="tour-airline" class="sr-only">สายการบิน</label><select class="input" id="tour-airline"><option value="">ทุกสายการบิน</option></select></div>
+        <button type="button" class="btn btn-ghost" id="tour-reset">ล้างตัวกรอง</button>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
         <span id="tour-count" style="color: var(--muted); font-size: 14px;" aria-live="polite"></span>
-        <div class="field"><label for="tour-sort">เรียงตาม</label><select class="input" id="tour-sort"><option value="">แนะนำ</option><option value="price-asc">ราคาต่ำ – สูง</option><option value="price-desc">ราคาสูง – ต่ำ</option></select></div>
+        <div class="field"><label for="tour-sort">เรียงตาม</label><select class="input" id="tour-sort"><option value="">แนะนำ</option><option value="price-asc">ราคาต่ำ – สูง</option><option value="price-desc">ราคาสูง – ต่ำ</option><option value="date">วันเดินทางใกล้สุด</option></select></div>
       </div>
     </div>
     <div class="grid grid-tours" id="tour-list"></div>

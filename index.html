@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&amp;family=Prompt:wght@500;600;700&amp;display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TravelAgency", "name": "Tako Tour", "url": "https://www.takoworldtour.com/", "logo": "https://www.takoworldtour.com/assets/img/logo.svg", "telephone": "+66994495465", "email": "lucktako@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "11, 17 Soi Somdet Phra Chao Tak Sin 33, Dao Khanong", "addressLocality": "Thon Buri", "addressRegion": "Bangkok", "postalCode": "10600", "addressCountry": "TH"}, "sameAs": ["https://www.instagram.com/takoworldtour", "https://line.me/R/ti/p/@takoworld"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TravelAgency", "name": "Tako Tour", "url": "https://www.takoworldtour.com/", "logo": "https://www.takoworldtour.com/assets/img/logo.svg", "telephone": "+66994495465", "email": "lucktako@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "11, 17 Soi Somdet Phra Chao Tak Sin 33, Dao Khanong", "addressLocality": "Thon Buri", "addressRegion": "Bangkok", "postalCode": "10600", "addressCountry": "TH"}, "sameAs": ["https://www.facebook.com/takoworldtour", "https://www.instagram.com/takoworldtour", "https://line.me/R/ti/p/@takoworld"]}</script>
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -39,10 +39,11 @@
 
   <section class="wrap search-wrap" aria-label="ค้นหาทัวร์">
     <form class="search-card" id="search-form" role="search">
-      <div class="field grow"><label for="q">ปลายทาง</label><input class="input" id="q" type="search" placeholder="ประเทศ เมือง หรือชื่อทัวร์"></div>
-      <div class="field"><label for="month">เดือนที่เดินทาง</label><select class="input" id="month"><option value="">ทุกเดือน</option><option value="พ.ย. 2569">พฤศจิกายน 2569</option><option value="ธ.ค. 2569">ธันวาคม 2569</option><option value="ม.ค. 2570">มกราคม 2570</option><option value="เม.ย. 2570">เมษายน 2570</option><option value="พ.ค. 2570">พฤษภาคม 2570</option><option value="ก.ย. 2570">กันยายน 2570</option></select></div>
-      <div class="field"><label for="pax">ผู้เดินทาง</label><select class="input" id="pax"><option>2 ผู้ใหญ่</option><option>1 ผู้ใหญ่</option><option>2 ผู้ใหญ่ 1 เด็ก</option><option>กรุ๊ปส่วนตัว 8 ท่านขึ้นไป</option></select></div>
-      <button class="btn btn-primary btn-lg" type="submit">ค้นหาทัวร์</button>
+      <div class="field grow"><label for="q">ชื่อหรือรหัสโปรแกรม</label><input class="input" id="q" type="search" placeholder="เช่น ญี่ปุ่น, กอล์ฟ, JP-KIX-06"></div>
+      <div class="field"><label for="from">เดินทางตั้งแต่</label><input class="input" id="from" type="date"></div>
+      <div class="field"><label for="to">ถึงวันที่</label><input class="input" id="to" type="date"></div>
+      <div class="field"><label for="airline">สายการบิน</label><select class="input" id="airline"><option value="">ทุกสายการบิน</option></select></div>
+      <button class="btn btn-primary btn-lg" type="submit">ค้นหา</button>
     </form>
   </section>
 
@@ -60,6 +61,16 @@
       <a class="text-link" href="tours.html">ดูทัวร์ทั้งหมด <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="grid grid-tours" id="featured-tours"></div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><span class="eyebrow">มากกว่าทัวร์</span><h2 class="h2">เลือกสไตล์เที่ยวของคุณ</h2></div></div>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));">
+      <a class="special" href="golf.html"><img src="assets/img/golf-swing.jpg" alt="นักกอล์ฟกำลังสวิง" loading="lazy" width="600" height="400"><div class="inner"><h3>ทัวร์ตีกอล์ฟ</h3><p>ญี่ปุ่น เวียดนาม หัวหิน เชียงใหม่</p></div></a>
+      <a class="special" href="cruise.html"><img src="assets/img/cruise-island.jpg" alt="เรือสำราญจอดริมเกาะ" loading="lazy" width="600" height="400"><div class="inner"><h3>เรือสำราญ</h3><p>สิงคโปร์ ญี่ปุ่น เมดิเตอร์เรเนียน</p></div></a>
+      <a class="special" href="destinations.html"><img src="assets/img/switzerland-lauterbrunnen.jpg" alt="หุบเขาเลาเทอร์บรุนเนิน สวิตเซอร์แลนด์" loading="lazy" width="600" height="400"><div class="inner"><h3>สถานที่ท่องเที่ยว</h3><p>คู่มือเที่ยวเอเชียและยุโรป</p></div></a>
+      <a class="special" href="visa.html"><img src="assets/img/uk-london.jpg" alt="วิวกรุงลอนดอน" loading="lazy" width="600" height="400"><div class="inner"><h3>บริการวีซ่า</h3><p>รับยื่นวีซ่าทุกประเภท</p></div></a>
+    </div>
   </section>
 
   <section class="section-sand">

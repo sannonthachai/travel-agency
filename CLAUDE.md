@@ -6,8 +6,13 @@ Client preview website for **Tako Tour Co., Ltd.**, a travel agency in Thon Buri
 
 ```
 index.html            Home: hero, search, destinations, featured tours, services, why-us, newsletter
-tours.html            Tour listing; filter by #hash (all|international|domestic|japan|france|italy|bali|thailand|search), text, month, sort
-tour.html             Tour detail rendered from #<tour-id>; round picker + pax stepper -> booking.html
+tours.html            Listing of ALL types; #hash filter (all|international|domestic|golf|cruise|<country>|search) + name/code, date range, airline, sort
+tour.html             Detail for any type from #<id>; golf shows courses, cruise shows route + cabin picker -> booking.html
+golf.html             Golf tours, #international / #domestic
+cruise.html           Cruise packages
+destinations.html     Travel-guide index (Asia / Europe)
+destination.html      Guide article from #<guide-key> (TAKO.guides)
+visa.html             Visa service + per-country visa info (TAKO.visas), #<visa-key> anchors
 booking.html          Booking request form (demo); reads selection from sessionStorage
 promotions.html       Tours that have a `promo` field
 private-group.html    Private/corporate group quote form (demo)
@@ -17,7 +22,7 @@ how-to-book.html      Steps, deposit table, payment methods (placeholders)
 cancellation.html     Draft cancellation terms (sample)
 faq.html              FAQ accordion from data.js
 assets/css/style.css  All styles; tokens in :root
-assets/js/data.js     ALL content: company info, destinations, tours, faqs (window.TAKO)
+assets/js/data.js     ALL content: company, airlines, destinations, tours (type tour|golf|cruise), guides, visas, faqs (window.TAKO)
 assets/js/site.js     Header/footer injection, nav, tour cards, page inits keyed by <body data-page>
 assets/img/           logo.svg, favicon.svg, Unsplash photos
 robots.txt, sitemap.xml, .nojekyll
@@ -42,6 +47,12 @@ No build step, no dependencies. Fonts load from Google Fonts.
 - ⚠️ No login/register — client explicitly cut them.
 - Plain static HTML/CSS/vanilla JS, no build step, so it hosts anywhere for the preview.
 - ⚠️ Routing state lives in `#hash` (`tour.html#japan-autumn`, `tours.html#domestic`), never query strings — the claude.ai artifact host drops query strings. Search/booking selections pass between pages via `sessionStorage` (`tako.search`, `tako.booking`), wrapped in try/catch.
+- ⚠️ Round dates are ISO `start`/`end` (YYYY-MM-DD); `site.js` formats them in Thai (พ.ศ.). Date-range search matches a round whose `start` falls inside the range — never store display strings.
+- One `tours` array for every product; `type` decides rendering. Golf rounds reuse `adult`/`child` as golfer/non-golfer price; cruise price = `cabins[i].price` × guests (round `adult`/`child` unused for cruise).
+- Search is one form across tours, golf and cruise: name/code text, date range, airline (`TAKO.airlines`). Golf by van has `airline: ''`, so an airline filter excludes it.
+- Nav: "ทัวร์ ▾" dropdown (international, domestic, golf international/domestic, cruise, private group) + destinations, visa, promotions, about, contact. Dropdown opens on hover ≥1081px, tap below; hamburger ≤1080px.
+- Visa data was researched 2026-10-19 (`visaUpdated`) from official/secondary sources; fees change yearly and several items were flagged uncertain (US Visa Integrity Fee, AU/NZ/CA fees). Re-verify before launch.
+- Cruise line/ship names are `[...]` placeholders on purpose — real ships weren't confirmed. Golf course names are real; Fukuoka course #3 is a placeholder.
 - Header/footer injected by `site.js` to avoid duplicating them across 11 pages. Known SEO cost; phase 2 should render them server-side.
 - All content lives in `assets/js/data.js`, shaped so the CMS can replace it.
 - ⚠️ Prices, rounds, promotions, deposit rates, cancellation terms are SAMPLE data pending client confirmation. Forms are demo-only (`data-demo-form`, no backend); footer says so.
@@ -63,6 +74,7 @@ No build step, no dependencies. Fonts load from Google Fonts.
 - Client review feedback on phase 1.
 - Real license number, bank account, office hours, company history, real prices/rounds/terms.
 - Real domain (update canonical, OG, sitemap, robots).
+- Confirm cruise lines/ships, golf partner courses, real golf/cruise prices; re-verify visa fees.
 - Choose CMS stack; migrate `data.js` content; server-render header/footer and tour pages; real form handling.
 
 ## References
@@ -71,4 +83,4 @@ No build step, no dependencies. Fonts load from Google Fonts.
 - Repo: https://github.com/sannonthachai/travel-agency
 - Design canvas (mockups + logo concepts): https://claude.ai/artifact/LvQrxPCAVGrf3R6jtkPmjB
 - Earlier artifact preview of this site: https://claude.ai/artifact/YDPvzpxFwW9VoYTRqxmrDb
-- Contact: LINE @takoworld · 099 449 5465 · lucktako@gmail.com · IG takoworldtour
+- Contact: LINE @takoworld · 099 449 5465 · lucktako@gmail.com · IG takoworldtour · FB https://www.facebook.com/takoworldtour
