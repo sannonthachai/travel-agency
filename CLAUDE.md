@@ -1,6 +1,6 @@
 # Tako Tour website
 
-Client preview website for **Tako Tour Co., Ltd.**, a travel agency in Thon Buri, Bangkok (tours, air tickets, visa, transport, hotel). Phase 1 = static clickable site for client review. Phase 2 = CMS to manage content (not started; waiting for client feedback).
+Client preview website for **Tako Tour Co., Ltd.**, a travel agency in Thon Buri, Bangkok (tours, air tickets, visa, transport, hotel). Phase 1 = static clickable site for client review. Phase 2 = production site + CMS, built in `~/sannonthachai/travel-agency-cms` (github.com/sannonthachai/travel-agency-cms, Next.js + Payload, Docker). This repo is now the approved design reference only; new work goes to the CMS repo.
 
 ## Layout
 
@@ -71,13 +71,11 @@ No build step, no dependencies. Fonts load from Google Fonts.
 - Tour detail and listing are client-rendered; no per-tour static pages, so crawlers see little content until phase 2.
 - Gallery on tour detail has one photo per tour.
 
-## Phase 2 TODO (waiting on client)
+## Phase 2 (started 2026-10-21 in travel-agency-cms)
 
-- Client review feedback on phase 1.
-- Real license number, bank account, office hours, company history, real prices/rounds/terms.
-- Real domain (update canonical, OG, sitemap, robots).
-- Confirm cruise lines/ships, golf partner courses, real golf/cruise prices; re-verify visa fees.
-- Choose CMS stack; migrate `data.js` content; server-render header/footer and tour pages; real form handling.
+- Done there: Next.js + Payload CMS stack, `data.js` content migrated as the CMS seed, server-rendered header/footer and tour pages.
+- Still waiting on client (tracked in the CMS repo's CLAUDE.md): real license number, bank account, office hours, company history, prices/rounds/terms, real domain, cruise lines/ships, golf partner courses; re-verify visa fees.
+- Changes to content or design now belong in the CMS repo; edit this static site only if the client asks for the preview itself to change.
 
 ## References
 
